@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@material-ui/icons";
+import { sliderItems } from '../data'
 
 const Container = styled.div`
     width: 100%;
     height: 100vh;
     display: flex;    
-    position: relative;
-    background: coral;
+    position: relative;    
+    overflow-x: hidden;
 `
 
 const Arrow = styled.div`
@@ -30,23 +31,30 @@ const Arrow = styled.div`
 `
 
 const Wrapper = styled.div`
-    height: 100%;
+    height: 100%;    
+    display: flex;    
+    transform: translateX(${props => props.slideIndex * -100}vw);
+    transition: all .7s ease;
 `
 
 const Slide = styled.div`
     width: 100vw;
     height: 100vh;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
+    background-color: #${props => props.bg};
 `
 
 const ImgContainer = styled.div`
     flex: 1;
-    height: 100%;
+    height: 100%;    
 `
 
 const Image = styled.img`
-    height: 80%;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 `
 
 const InfoContainer = styled.div`
@@ -74,27 +82,43 @@ const Button = styled.button`
 `
 
 const Slider = () => {
+    const [slideIndex, setSlideIndex] = useState(0)    
+
+    const handleClick = (direction) => {        
+        if (direction === 'left') {
+            setSlideIndex(slideIndex > 0 ? slideIndex-1 : sliderItems.length-1)
+        } else {
+            setSlideIndex(slideIndex < sliderItems.length-1 ? slideIndex+1 : 0)
+        }
+    }
+    
+    useEffect(() => {
+        console.log(slideIndex ,sliderItems.length-1);
+    })
+
     return (
         <Container>
-            <Arrow direction="left"> 
+            <Arrow direction="left" onClick={() => handleClick("left")} >  
                 <ArrowLeftOutlined />
             </Arrow>
 
-            <Wrapper>
-                <Slide>
-                    <ImgContainer>
-                        <Image src="/assets/banner/nike_main_banner.jpeg" />
-                    </ImgContainer>
+            <Wrapper className="sliderWrapper" slideIndex={slideIndex}>
+                {sliderItems.map(element => (
+                    <Slide bg={element.bg} key={element.id}>
+                        <ImgContainer>
+                            <Image src={element.img}/>
+                        </ImgContainer>
 
-                    <InfoContainer>
-                        <Title>The Best of Air Max</Title>
-                        <Description>Featuring the OG’s ripple design that was inspired by Japanese bullet trains, the Nike Air Max 97 lets you push your style full speed ahead.</Description>
-                        <Button>Shop</Button>
-                    </InfoContainer>
-                </Slide>
+                        <InfoContainer>
+                            <Title>{element.title}</Title>
+                            <Description>{element.desc}</Description>
+                            <Button>SHOP NOW</Button>
+                        </InfoContainer>
+                    </Slide>
+                ))}
             </Wrapper>
 
-            <Arrow direction="right">
+            <Arrow direction="right" onClick={() => handleClick("right")}>
                 <ArrowRightOutlined />
             </Arrow>
         </Container>

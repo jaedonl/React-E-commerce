@@ -30,12 +30,16 @@ const InputContainer = styled.div`
     display: flex;
     justify-content: space-between;
     border: 1px solid #eee;
-    padding-left: 20px;
+    padding-left: 20px;    
 `
 
 const Input = styled.input`    
     flex: 8;
     border: none;
+    
+    &:focus {
+        outline: none;
+    }
 `
 
 const Button = styled.button`

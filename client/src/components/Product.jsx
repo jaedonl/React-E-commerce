@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import { AddShoppingCart, Search, FavoriteBorder } from "@material-ui/icons";
 
+
 const Info = styled.div`
     opacity: 0;
     width: 100%;
@@ -18,8 +19,8 @@ const Info = styled.div`
 `
 
 const Container = styled.div`
-    flex: 1;
-    margin: 5px;
+    /* flex: 1; */
+    /* margin: 5px; */
     min-width: 280px;
     height: 350px;
     display: flex;

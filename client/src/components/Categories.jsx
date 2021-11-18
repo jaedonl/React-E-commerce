@@ -8,6 +8,8 @@ const Container = styled.div`
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 20px;
+    /* max-width: 1500px;
+    margin: 0 auto; */
 `
 
 const Categories = () => {

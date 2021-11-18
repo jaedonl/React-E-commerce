@@ -10,6 +10,9 @@ const Container = styled.div`
     justify-content: space-between; */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-gap: 5px;
+    /* max-width: 1500px;
+    margin: 0 auto; */
 `
 
 const Products = () => {

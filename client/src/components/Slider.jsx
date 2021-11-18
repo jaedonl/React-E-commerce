@@ -8,7 +8,7 @@ const Container = styled.div`
     height: 100vh;
     display: flex;    
     position: relative;    
-    overflow-x: hidden;
+    overflow: hidden;
 `
 
 const Arrow = styled.div`
@@ -79,6 +79,7 @@ const Button = styled.button`
     font-size: 20px;
     background-color: transparent;
     cursor: pointer;
+    border: 2px solid #000;
 `
 
 const Slider = () => {

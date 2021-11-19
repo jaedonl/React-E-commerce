@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import {  } from "@material-ui/icons";
 
 const Container = styled.div`        
     width: 100vw;
@@ -38,7 +37,7 @@ const Form = styled.form`
 const Input = styled.input`        
     flex: 1;
     min-width: 40%;
-    margin: 20px 10px 0px 0px;
+    margin: 10px 0px;
     padding: 10px;
 `
 
@@ -54,10 +53,13 @@ const Button = styled.button`
     background-color: teal;
     color: white;
     cursor: pointer;
+    margin-bottom: 10px;
 `
 
 const Link = styled.a`  
-
+    margin: 5px 0;
+    font-size: 12px;
+    cursor: pointer;    
 `
 
 const Login = () => {

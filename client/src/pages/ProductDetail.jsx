@@ -4,15 +4,16 @@ import Announcement from '../components/Announcement'
 import Navbar from '../components/Navbar'
 import Newsletter from '../components/Newsletter'
 import Footer from '../components/Footer'
+import { Add, Remove } from "@material-ui/icons";
 
 
 const Container = styled.div`        
 `
 
 const Wrapper = styled.div`
-    padding: 50px;
+    padding: 50px 20px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 5fr 3fr;
     grid-gap: 20px;
     justify-content: space-between;
 `
@@ -23,7 +24,7 @@ const ImgContainer = styled.div`
 
 const Image = styled.img`
     width: 100%;
-    height: 90vh;
+    height: 75vh;
     object-fit: cover;
 `
 
@@ -64,15 +65,56 @@ const FilterColor = styled.div`
     width: 20px;
     height: 20px;
     border-radius: 50%;
+    background-color: ${props=> props.color};
+    margin: 0px 5px;
 `
 
 const FilterSize = styled.select`
-    
+    margin: 10px;
+    padding: 5px;
 `
 
 const FilterSizeOption = styled.option`
-    
 `
+
+const AddContainer = styled.div`    
+    display: flex;
+    align-items: center;        
+`
+
+const AmountContainer = styled.div`
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    margin-right: 50px;
+`
+
+const Amount = styled.span`
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5px;
+`
+
+const Button = styled.button`
+    padding: 15px;
+    border: 2px solid #555;
+    background-color: #fff;
+    font-weight: 500;
+    color: #000;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background-color: #555;
+        color: #fff;
+    }
+`
+
 
 const ProductDetail = () => {
         
@@ -83,7 +125,7 @@ const ProductDetail = () => {
             
             <Wrapper>
                 <ImgContainer>
-                    <Image src="https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/ec602aa2-b8e6-4a6e-97fe-9ed8e7febb87/dunk-high-womens-shoes-L3Tqlr.png" />
+                    <Image src="/assets/shoes/dunk_high.jpg" />
                 </ImgContainer>
 
                 <InfoContainer>
@@ -93,7 +135,8 @@ const ProductDetail = () => {
                     <FilterContainer>
                         <Filter>
                             <FilterTitle>Color</FilterTitle>
-                            <FilterColor color="One color" />  
+                            <FilterColor color="black" />
+                            <FilterColor color="orange" />  
                         </Filter>
                         <Filter>
                             <FilterTitle>Size</FilterTitle>
@@ -103,10 +146,19 @@ const ProductDetail = () => {
                                 <FilterSizeOption>9</FilterSizeOption>
                                 <FilterSizeOption>10</FilterSizeOption>
                                 <FilterSizeOption>11</FilterSizeOption>
-                            </FilterSize>
-                            
+                            </FilterSize>                            
                         </Filter>
                     </FilterContainer>
+
+                    <AddContainer>
+                        <AmountContainer>
+                            <Remove/>
+                            <Amount>1</Amount>
+                            <Add/>
+                        </AmountContainer>
+                        <Button>ADD TO CART</Button>
+                    </AddContainer>
+
                 </InfoContainer>
             </Wrapper>
 

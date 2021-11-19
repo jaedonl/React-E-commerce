@@ -4,6 +4,7 @@ import { Send } from "@material-ui/icons";
 
 
 const Container = styled.div`
+    margin: 20px 0;
     height: 60vh;
     background-color: #fcf5f5;
     display: flex;

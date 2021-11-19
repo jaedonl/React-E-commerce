@@ -4,7 +4,9 @@ import { Facebook, Instagram, Twitter, Pinterest, Room, Phone, MailOutline } fro
 
 
 const Container = styled.div`
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
+    justify-content: space-between;
     margin: 20px 0;
 `
 

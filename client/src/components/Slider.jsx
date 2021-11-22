@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@material-ui/icons";
 import { sliderItems } from '../data'
+import {mobile} from '../responsive'
+
 
 const Container = styled.div`
     width: 100%;
@@ -9,6 +11,7 @@ const Container = styled.div`
     display: flex;    
     position: relative;    
     overflow: hidden;
+    ${mobile({ display: "none" })}
 `
 
 const Arrow = styled.div`
@@ -44,6 +47,7 @@ const Slide = styled.div`
     grid-template-columns: 1fr 1fr;
     align-items: center;
     background-color: #${props => props.bg};
+    ${mobile({ gridTemplateColumns: "1fr" })}
 `
 
 const ImgContainer = styled.div`

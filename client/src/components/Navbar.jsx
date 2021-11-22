@@ -34,10 +34,12 @@ const SearchContainer = styled.div`
     align-items: center;
     margin-left: 25px;
     padding: 5px;
+    ${mobile({ marginLeft: "15px" })}
 `
 
 const Input = styled.input`
     border: none;    
+    ${mobile({ width: "50px" })}
 `
 
 const Center = styled.div`
@@ -47,6 +49,7 @@ const Center = styled.div`
 
 const Logo = styled.h1`
     font-weight: 700;
+    ${mobile({ fontSize: "24px" })}
 `
 
 const Right = styled.div`
@@ -54,12 +57,15 @@ const Right = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    ${mobile({ flex: 2, justifyContent: "center" })}
+    
 `
 
 const MenuItem = styled.div`
     font-size: 14px;
     cursor: pointer;
     margin-left: 25px;
+    ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `
 
 const Navbar = () => {
@@ -69,8 +75,8 @@ const Navbar = () => {
                 <Left>
                     <Language>EN</Language>
                     <SearchContainer>
-                        <Input />
-                        <Search style={{color:"gray", fontSize:"16px"}} />
+                        <Input placeholder="Search" />
+                        <Search style={{color:"gray", fontSize: 16}} />
                     </SearchContainer>
                 </Left>
 

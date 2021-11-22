@@ -1,13 +1,14 @@
 import React from 'react'
 import styled from "styled-components"
 import { Facebook, Instagram, Twitter, Pinterest, Room, Phone, MailOutline } from "@material-ui/icons";
-
+import { mobile } from '../responsive';
 
 const Container = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-content: space-between;
     margin: 20px 0;
+    ${mobile({ gridTemplateColumns: "1fr", gridGap: "10px" })}
 `
 
 const Left = styled.div`
@@ -45,6 +46,7 @@ const SocialIcon = styled.div`
 const Center = styled.div`
     flex: 1;
     padding: 20px;
+    ${mobile({ display: "none" })}
 `
 
 const Title = styled.h3`

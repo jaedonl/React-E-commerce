@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar'
 import Newsletter from '../components/Newsletter'
 import Footer from '../components/Footer'
 import { Add, Remove } from "@material-ui/icons";
-
+import { mobile } from '../responsive'
 
 const Container = styled.div`        
 `
@@ -16,6 +16,7 @@ const Wrapper = styled.div`
     grid-template-columns: 5fr 3fr;
     grid-gap: 20px;
     justify-content: space-between;
+    ${mobile({ padding: "10px", gridTemplateColumns: "1fr" })}
 `
 
 const ImgContainer = styled.div`
@@ -26,6 +27,7 @@ const Image = styled.img`
     width: 100%;
     height: 75vh;
     object-fit: cover;
+    ${mobile({ height: "45vh" })}
 `
 
 const InfoContainer = styled.div` 
@@ -45,10 +47,13 @@ const Price = styled.span`
 `
 
 const FilterContainer = styled.div`        
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    /* display: grid;
+    grid-template-columns: 1fr 1fr; */
+    width: 50%;
+    display: flex;
     justify-content: space-between;    
     margin: 30px 0px;
+    ${mobile({ width: "100%" })}
 `
 
 const Filter = styled.div`
@@ -70,7 +75,7 @@ const FilterColor = styled.div`
 `
 
 const FilterSize = styled.select`
-    margin: 10px;
+    margin-left: 10px;
     padding: 5px;
 `
 
@@ -78,8 +83,11 @@ const FilterSizeOption = styled.option`
 `
 
 const AddContainer = styled.div`    
+    width: 50%;
     display: flex;
-    align-items: center;        
+    align-items: center;   
+    justify-content: space-between;
+    ${mobile({ width: "100%" })}
 `
 
 const AmountContainer = styled.div`

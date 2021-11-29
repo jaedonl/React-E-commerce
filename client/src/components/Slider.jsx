@@ -98,7 +98,7 @@ const Slider = () => {
     }
     
     useEffect(() => {
-        console.log(slideIndex ,sliderItems.length-1);
+        
     })
 
     return (

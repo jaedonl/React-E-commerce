@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 import styled from 'styled-components'
 import { Badge } from "@material-ui/core"
 import { Search, ShoppingCartOutlined } from "@material-ui/icons";
@@ -81,7 +82,7 @@ const Navbar = () => {
                 </Left>
 
                 <Center>
-                    <Logo>JdonL.</Logo>      
+                    <Link to="/" style={{textDecoration: "none", color: "#000"}}><Logo>JdonL.</Logo></Link>                    
                 </Center>
                 
                 <Right>

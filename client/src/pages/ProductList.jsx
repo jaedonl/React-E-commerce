@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import styled from 'styled-components'
 import Announcement from '../components/Announcement'
 import Navbar from '../components/Navbar'
@@ -45,33 +45,46 @@ const ProductList = () => {
     const category = location.pathname.split("/")[2]
     const [filters, setFilters] = useState({})
     const [sort, setSort] = useState("newest")
+    
+    
+    var splitted = location.pathname.split("/")
+    console.log(splitted.length);
+    var x = splitted[splitted.length-1]
+    console.log(x);
 
     const handleFilters = (e) => {
         const value = e.target.value
+
+        // if(value !== category) {
+        //     history.push('./value');
+        // }
+
         setFilters({
             ...filters,
             [e.target.name]: value 
-        })
-        
+        })        
     }
+
+    useEffect(() => {        
+    })    
     
     return (
         <Container>
             <Announcement/>
             <Navbar/>
-            <Title>Shoes</Title>
+            <Title>Shoes / <span style={{textTransform:"capitalize"}}>{category}</span></Title>
             <FilterContainer>
                 <Filter>
                     <FilterText>Filter Products:</FilterText>
                     <Select name="type" onChange={handleFilters}>
                         <Option disabled>Series</Option>
-                        <Option>Air Jordan</Option>
-                        <Option>Air Force</Option>                        
-                        <Option>Air Max</Option>
-                        <Option>Air Vapormax</Option>
-                        <Option>Dunk</Option>
-                        <Option>Blazer</Option>                        
-                        <Option>Basketball</Option>
+                        <Option>jordan</Option>
+                        <Option>force</Option>                        
+                        <Option>max</Option>
+                        <Option>vapormax</Option>
+                        <Option>dunk</Option>
+                        <Option>blazer</Option>                        
+                        <Option>basketball</Option>
                     </Select>
                     <Select name="size" onChange={handleFilters}>
                         <Option disabled>Size</Option>
@@ -92,6 +105,7 @@ const ProductList = () => {
                     </Select>
                 </Filter>
             </FilterContainer> 
+            
             <Products category={category} filters={filters} sort={sort} />
             <Newsletter/>
             <Footer/>

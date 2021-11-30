@@ -10,6 +10,7 @@ import { mobile } from '../responsive'
 import { tablet } from '../responsive'
 import { publicRequest } from '../requestMethods';
 
+
 const Container = styled.div`        
 `
 const Wrapper = styled.div`
@@ -116,19 +117,20 @@ const Button = styled.button`
 const ProductDetail = () => {
     const location = useLocation()
     const productId = location.pathname.split("/")[2]
-    const [product, setProduct] = useState({})    
+    const [product, setProduct] = useState({})
+    const [quantity, setQuantity] = useState(1)    
+    const [size, setSize] = useState("")   
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [location])
-    
 
     useEffect(() => {
         const getProduct = async () => {
             try {
                 const res = await publicRequest.get("/products/find/" + productId)
-                setProduct(res.data)           
-                                
+                setProduct(res.data)        
+                                             
             } catch (err) {
                 console.log(err)
             }
@@ -136,11 +138,16 @@ const ProductDetail = () => {
         getProduct()
     }, [productId]);        
 
+    useEffect(() => {
+        console.log(quantity, size);
+    })
+    
+    
+    const handleClick = () => {
+        
+    }
 
-    useEffect(() => {                
-    });
-
-    return (        
+    return (
         <Container>
             <Announcement/>
             <Navbar/>
@@ -156,30 +163,35 @@ const ProductDetail = () => {
                     <Price>$ {product.price}</Price>
                     <FilterContainer>
                         <Filter>
-                            <FilterTitle>Theme Color</FilterTitle>                            
-                            <FilterColor color={product.color} />
-                            { product.color2 ? <FilterColor color={product.color2} /> : null }
-                            
+                            <FilterTitle>Theme Color</FilterTitle>           
+                                { product.color?.map((c, idx) => 
+                                    <FilterColor color={c} key={idx} />
+                                )}                                                    
                         </Filter>
                         <Filter>
                             <FilterTitle>Size</FilterTitle>
-                            <FilterSize>
-                                <FilterSizeOption>7</FilterSizeOption>
+                            <FilterSize onChange={(e) => setSize(e.target.value)}> 
+                                    { product.size?.map((s) => {
+                                        
+                                        return <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                                    })}                                
+
+                                {/* <FilterSizeOption>7</FilterSizeOption>
                                 <FilterSizeOption>8</FilterSizeOption>
                                 <FilterSizeOption>9</FilterSizeOption>
                                 <FilterSizeOption>10</FilterSizeOption>
-                                <FilterSizeOption>11</FilterSizeOption>
+                                <FilterSizeOption>11</FilterSizeOption> */}
                             </FilterSize>                            
                         </Filter>
                     </FilterContainer>
 
                     <AddContainer>
                         <AmountContainer>
-                            <Remove/>
-                            <Amount>1</Amount>
-                            <Add/>
+                            <Remove onClick={(e) => quantity > 1 ? setQuantity(quantity - 1) : setQuantity(1)} />
+                            <Amount>{quantity}</Amount>
+                            <Add onClick={(e) => setQuantity(quantity + 1)} />
                         </AmountContainer>
-                        <Button>ADD TO CART</Button>
+                        <Button onClick={handleClick}>ADD TO CART</Button>
                     </AddContainer>
 
                 </InfoContainer>

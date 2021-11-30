@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import Announcement from '../components/Announcement'
 import Navbar from '../components/Navbar'
@@ -163,6 +164,12 @@ const Button = styled.button`
 
 
 const Cart = () => {
+    const location = useLocation()
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location])
+
     return (
         <Container>
             <Announcement/>

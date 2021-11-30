@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react'
+import { useLocation } from 'react-router-dom';
 import axios from "axios";
 import styled from 'styled-components';
-import { popularProducts } from '../data'
 import Product from './Product'
 import {mobile} from '../responsive'
 import {tablet} from '../responsive'
@@ -21,6 +21,7 @@ const Container = styled.div`
 `
 
 const Products = ({category, filters, sort}) => {
+    const location = useLocation()
     const [products, setProducts] = useState([])
     const [filteredProducts, setFilteredProducts] = useState([])
 
@@ -28,10 +29,8 @@ const Products = ({category, filters, sort}) => {
         const getProducts = async () => {
             try {
                 const res = 
-                    await axios.get( 
-                        category 
-                        ? `http://localhost:8000/api/products?category=${category}` 
-                        : "http://localhost:8000/api/products")
+                    await axios.get( category   ? `http://localhost:8000/api/products?category=${category}` 
+                                                : "http://localhost:8000/api/products")
                 setProducts(res.data)
                 
             } catch (err) {
@@ -41,14 +40,16 @@ const Products = ({category, filters, sort}) => {
         getProducts()     
     }, [category])
 
+
     useEffect(() => {
         category && setFilteredProducts(
-            products.filter(item => 
-                Object.entries(filters).every(([key, value]) => 
+            products.filter((item) => 
+                Object.entries(filters).every(([key, value]) =>
                     item[key].includes(value)
             ))
         )
     }, [products, category, filters])
+
 
     useEffect(() => {
         if (sort === "newest") {
@@ -69,12 +70,12 @@ const Products = ({category, filters, sort}) => {
     }, [sort])
 
     return (
-        <Container>
-            { category 
-                ? filteredProducts.map(element => 
-                    <Product item={element} key={element.id} />)
-                : products.map(element => 
-                    <Product item={element} key={element.id} />)
+        <Container>            
+            { location.pathname !== '/' && category 
+                ? filteredProducts.map(item => 
+                    <Product item={item} key={item.id} />)
+                : products.slice(0, 6).map(item => 
+                    <Product item={item} key={item.id} />)
             }
             
         </Container>

@@ -8,8 +8,9 @@ import Login from "./pages/Login";
 import Cart from "./pages/Cart";
 
 const App = () => {
-  const user = true
-  return (
+  const user = true  
+
+  return (    
     <Router>
       <Switch>
         <Route exact path="/" component={Home} />        
@@ -28,13 +29,6 @@ const App = () => {
         </Route>
                 
       </Switch>
-      
-      {/* <Home/> */}
-      {/* <ProductList/> */}
-      {/* <ProductDetail/> */} 
-      {/* <Register/> */}
-      {/* <Login/> */}
-      {/* <Cart/> */}
     </Router>    
   );
 }

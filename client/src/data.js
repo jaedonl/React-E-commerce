@@ -27,31 +27,31 @@ export const categories = [
       id: 1,
       img: "/assets/categories/cate_jordan.jpg",
       title: "Air Jordans",
-      category: "jordan"
+      category: "air-jordan"
     },
     {
       id: 2,
       img: "/assets/categories/cate_max.jpg",
       title: "Air Max",
-      category: "max"
+      category: "air-max"
     },
     {
       id: 3,
       img: "/assets/categories/cate_force.jpg",
       title: "Air Force",
-      category: "force"
+      category: "air-force"
     },    
     {
       id: 4,
       img: "/assets/categories/cate_dunk.jpg",
       title: "Nike Dunk",
-      category: "dunk"
+      category: "nike-dunk"
     },
     {
       id: 5,
       img: "/assets/categories/cate_blazer.jpg",
       title: "Basketball Series",
-      category: "blazer"
+      category: "nike-blazer"
     },
     {
       id: 6,
@@ -63,7 +63,7 @@ export const categories = [
       id: 7,
       img: "/assets/categories/cate_vapormax.jpg",
       title: "Vapormax",
-      category: "vapormax"
+      category: "air-vapormax"
     }
   ]
 

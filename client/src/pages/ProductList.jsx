@@ -7,57 +7,57 @@ import Products from '../components/Products'
 import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 import { mobile } from '../responsive';
+import { categories } from '../data';
 
 const Container = styled.div``
 
 const Title = styled.h1`
     margin: 50px 20px 20px;
 `
-
 const FilterContainer = styled.div`
     display: flex;
     justify-content: space-between;
 `
-
 const Filter = styled.div`
     margin: 20px;
     ${mobile({ margin: "0px 20px", display: "flex", flexDirection:"column" })}
 `
-
 const FilterText = styled.span`
     font-size: 20px;
     font-weight: 600;
     margin-right: 20px;
     ${mobile({ marginRight: "0px" })}
 `
-
 const Select = styled.select`
     padding: 10px;    
     margin-right: 20px;
     ${mobile({ margin: "5px 0px" })}
 `
-
 const Option = styled.option`
 `
 
 const ProductList = () => {
     const location = useLocation()
+    const history = useHistory()
     const category = location.pathname.split("/")[2]
     const [filters, setFilters] = useState({})
     const [sort, setSort] = useState("newest")
     
-    
-    var splitted = location.pathname.split("/")
-    console.log(splitted.length);
-    var x = splitted[splitted.length-1]
-    console.log(x);
+    let splitted = location.pathname.split("/")        
+    console.log(splitted)
+    let x
 
     const handleFilters = (e) => {
         const value = e.target.value
+        const valueType = e.target.name
 
-        // if(value !== category) {
-        //     history.push('./value');
-        // }
+        if(valueType === "type" && value !== category) {
+            splitted.splice(splitted.length-1, splitted.length, value)
+            x = splitted.join('/')
+
+            history.push(x)
+            window.location.reload()
+        }
 
         setFilters({
             ...filters,
@@ -65,26 +65,33 @@ const ProductList = () => {
         })        
     }
 
-    useEffect(() => {        
-    })    
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location])
     
     return (
         <Container>
             <Announcement/>
             <Navbar/>
-            <Title>Shoes / <span style={{textTransform:"capitalize"}}>{category}</span></Title>
+            <Title><span style={{textTransform:"capitalize"}}>{category.replace("-", " ")}</span></Title>
             <FilterContainer>
                 <Filter>
                     <FilterText>Filter Products:</FilterText>
-                    <Select name="type" onChange={handleFilters}>
-                        <Option disabled>Series</Option>
+                    <Select name="type" onChange={handleFilters} style={{textTransform: "capitalize"}}>
+                        { categories.map(option =>          
+                            option.category === category 
+                                ? <Option disabled selected>{option.category}</Option> 
+                                : <Option>{option.category}</Option>
+                        )}
+
+                        {/* <Option disabled selected>select</Option>
                         <Option>jordan</Option>
                         <Option>force</Option>                        
                         <Option>max</Option>
                         <Option>vapormax</Option>
                         <Option>dunk</Option>
                         <Option>blazer</Option>                        
-                        <Option>basketball</Option>
+                        <Option>basketball</Option> */}
                     </Select>
                     <Select name="size" onChange={handleFilters}>
                         <Option disabled>Size</Option>

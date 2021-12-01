@@ -129,21 +129,16 @@ const ProductDetail = () => {
         const getProduct = async () => {
             try {
                 const res = await publicRequest.get("/products/find/" + productId)
-                setProduct(res.data)        
-                                             
-            } catch (err) {
-                console.log(err)
-            }
+                setProduct(res.data)                         
+                setSize(res.data.size[0])                
+                
+            } catch(err) {console.log(err)}
         }
         getProduct()
     }, [productId]);        
-
-    useEffect(() => {
-        console.log(quantity, size);
-    })
     
     
-    const handleClick = () => {
+    const addToCart = () => {
         
     }
 
@@ -191,7 +186,7 @@ const ProductDetail = () => {
                             <Amount>{quantity}</Amount>
                             <Add onClick={(e) => setQuantity(quantity + 1)} />
                         </AmountContainer>
-                        <Button onClick={handleClick}>ADD TO CART</Button>
+                        <Button onClick={addToCart}>ADD TO CART</Button>
                     </AddContainer>
 
                 </InfoContainer>

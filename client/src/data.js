@@ -50,7 +50,7 @@ export const categories = [
     {
       id: 5,
       img: "/assets/categories/cate_blazer.jpg",
-      title: "Basketball Series",
+      title: "Nike Blazer",
       category: "nike-blazer"
     },
     {

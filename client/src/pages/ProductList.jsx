@@ -44,7 +44,6 @@ const ProductList = () => {
     const [sort, setSort] = useState("newest")
     
     let splitted = location.pathname.split("/")        
-    console.log(splitted)
     let x
 
     const handleFilters = (e) => {

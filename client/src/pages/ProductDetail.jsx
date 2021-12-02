@@ -6,9 +6,10 @@ import Navbar from '../components/Navbar'
 import Newsletter from '../components/Newsletter'
 import Footer from '../components/Footer'
 import { Add, Remove } from "@material-ui/icons";
-import { mobile } from '../responsive'
-import { tablet } from '../responsive'
+import { mobile, tablet } from '../responsive'
 import { publicRequest } from '../requestMethods';
+import { addProduct } from '../redux/cartRedux'
+import { useDispatch } from 'react-redux'
 
 
 const Container = styled.div`        
@@ -22,7 +23,6 @@ const Wrapper = styled.div`
     ${mobile({ padding: "10px", gridTemplateColumns: "1fr" })}
 `
 const ImgContainer = styled.div`
-    /* border: 3px solid #ccc; */
 `
 const Image = styled.img`
     width: 100%;
@@ -119,7 +119,8 @@ const ProductDetail = () => {
     const productId = location.pathname.split("/")[2]
     const [product, setProduct] = useState({})
     const [quantity, setQuantity] = useState(1)    
-    const [size, setSize] = useState("")   
+    const [size, setSize] = useState("")  
+    const dispatch = useDispatch()
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -139,7 +140,9 @@ const ProductDetail = () => {
     
     
     const addToCart = () => {
-        
+        dispatch(
+            addProduct({ ...product, quantity, size })
+        )        
     }
 
     return (
@@ -166,10 +169,9 @@ const ProductDetail = () => {
                         <Filter>
                             <FilterTitle>Size</FilterTitle>
                             <FilterSize onChange={(e) => setSize(e.target.value)}> 
-                                    { product.size?.map((s) => {
-                                        
-                                        return <FilterSizeOption key={s}>{s}</FilterSizeOption>
-                                    })}                                
+                                    { product.size?.map((s) => 
+                                        <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                                    )}                                
 
                                 {/* <FilterSizeOption>7</FilterSizeOption>
                                 <FilterSizeOption>8</FilterSizeOption>

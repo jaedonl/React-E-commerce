@@ -18,7 +18,6 @@ const Info = styled.div`
     justify-content: center;
     transition: all 0.4s ease;
 `
-
 const Container = styled.div`
     /* flex: 1; */
     /* margin: 5px; */
@@ -33,7 +32,6 @@ const Container = styled.div`
         opacity: 1;
     }
 `
-
 const Circle = styled.div`
     width: 200px;
     height: 200px;
@@ -41,7 +39,6 @@ const Circle = styled.div`
     background-color: #fff;
     position: absolute;
 `
-
 const Image = styled.img`
     /* height: 75%; */
     height: 100%;
@@ -49,7 +46,6 @@ const Image = styled.img`
     object-fit: cover;
     z-index: 2;
 `
-
 const Icon = styled.div`
     width: 40px;
     height: 40px;
@@ -67,7 +63,6 @@ const Icon = styled.div`
         cursor: pointer;
     }
 `
-
 
 const Product = ({item}) => {
     return (

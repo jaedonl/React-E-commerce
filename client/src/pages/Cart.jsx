@@ -6,26 +6,23 @@ import Navbar from '../components/Navbar'
 import Footer from "../components/Footer";
 import { Add, Remove } from "@material-ui/icons";
 import {mobile} from '../responsive'
+import { useSelector } from "react-redux";
 
 const Container = styled.div``
-
 const Wrapper = styled.div`
     padding: 20px;
     ${mobile({ padding: "10px" })}
 `
-
 const Title = styled.h1`
     font-weight: 300;
     text-align: center;
 `
-
 const Top = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 20px 0;
 `
-
 const TopButton = styled.button`
     padding: 10px;
     font-weight: 600;
@@ -36,44 +33,35 @@ const TopButton = styled.button`
     color: ${props => props.type === "filled" && "#fff"};
     
 `
-
 const TopTexts = styled.div`
     ${mobile({ display: "none" })}
 `
-
 const TopText = styled.span`
     text-decoration: underline;
     cursor: pointer;
     margin: 0 10px;
 `
-
 const Bottom = styled.div`
     display: flex;
     justify-content: space-between;
     ${mobile({ flexDirection: "column" })}
 `
-
 const Info = styled.div`
     flex: 3;
 `
-
 const Product = styled.div`
     display: flex;
     justify-content: space-between;
     ${mobile({ margin: "10px 0" })}
 `
-
-
 const ProductInfo = styled.div`
     flex: 2;
     display: flex;
 `
-
 const Image = styled.img`
     width: 200px;    
     ${mobile({ width: "135px", objectFit: "cover" })}
 `
-
 const Details = styled.div`
     padding: 20px;
     display: flex;
@@ -81,21 +69,20 @@ const Details = styled.div`
     justify-content: space-around;
     ${mobile({ padding: "10px" })}
 `
-
 const ProductName = styled.span``
-
-const ProductId = styled.span`    `
-
+const ProductId = styled.span``
+const ProductColorWrapper = styled.div`
+    display: flex;    
+`
 const ProductColor = styled.span`
     width: 20px;
     height: 20px;
     border-radius: 50%;
     background-color: ${props => props.color };
+    margin-right: 3px;
 `
-
 const ProductSize = styled.span`
 `
-
 const PriceDetail = styled.div`
     flex: 1;
     display: flex;
@@ -104,32 +91,27 @@ const PriceDetail = styled.div`
     justify-content: center;
     ${mobile({ flex: "none" })}
 `
-
 const ProductAmountContainer = styled.div`
     display: flex;
     align-items: center;
     margin-bottom: 20px;
     ${mobile({ fontSize: "1em" })}
 `
-
 const ProductAmount = styled.div`
     font-size: 24px;
     margin: 5px;  
     ${mobile({ margin: "5px 15px" })}
 `
-
 const ProductPrice = styled.div`
     font-size: 30px;
     font-weight: 200;
     ${mobile({ fontSize: "24px" })}
 `
-
 const Hr = styled.hr`
     background-color: #eee;
     border: none;
     height: 1px;
 `
-
 const Summary = styled.div`
     flex: 1;
     border: 0.5px solid lightgray;
@@ -137,11 +119,9 @@ const Summary = styled.div`
     padding: 20px;
     height: 50vh;
 `
-
 const SummaryTitle = styled.h1`
     font-weight: 200;
 `
-
 const SummaryItem = styled.div`
     margin: 30px 0px;
     display: flex;
@@ -149,11 +129,8 @@ const SummaryItem = styled.div`
     font-weight: ${(props) => props.type === "total" && "500"};
     font-size: ${(props) => props.type === "total" && "24px"};
 `
-
 const SummaryItemText = styled.span``
-
 const SummaryItemPrice = styled.span``
-
 const Button = styled.button`
     width: 100%;
     padding: 10px;
@@ -162,13 +139,14 @@ const Button = styled.button`
     font-weight: 600;
 `
 
-
 const Cart = () => {
     const location = useLocation()
+    const cart = useSelector(state => state.cart)
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [location])
+    
 
     return (
         <Container>
@@ -180,7 +158,7 @@ const Cart = () => {
                 <Top>
                     <TopButton>CONTINUE SHOPPING</TopButton>
                     <TopTexts>
-                        <TopText>Shopping Bag(2)</TopText>
+                        <TopText>Shopping Bag({cart.quantity})</TopText>
                         <TopText>Wishlist (0)</TopText>
                     </TopTexts>                    
                     <TopButton type="filled">CHECKOUT</TopButton>
@@ -188,47 +166,36 @@ const Cart = () => {
                 
                 <Bottom>
                     <Info>
-                        <Product>
-                            <ProductInfo>
-                                <Image src="/assets/shoes/dunk_high.jpg" />
-                                <Details>
-                                    <ProductName><b>Product:</b> Nike Dunk High</ProductName>
-                                    <ProductId><b>ID:</b> 1524312</ProductId>
-                                    <ProductColor color="black" />
-                                    <ProductSize><b>Size: </b> 9</ProductSize>
-                                </Details>
-                            </ProductInfo>
+                        { cart.products.map(product => (
+                            <Product>
+                                <ProductInfo>
+                                    <Image src={product.img} />
+                                    <Details>
+                                        <ProductName><b>Product:</b> {product.title}</ProductName>
+                                        <ProductId><b>ID:</b> {product._id}</ProductId>
+                                        <ProductColorWrapper>
+                                            { product.color?.map((c, idx) => 
+                                                <ProductColor color={c} key={idx}/>                                            
+                                            )}    
+                                        </ProductColorWrapper>
+                                       
+                                        
+                                        <ProductSize><b>Size: </b> {product.size}</ProductSize>
+                                    </Details>
+                                </ProductInfo>
 
-                            <PriceDetail>
-                                <ProductAmountContainer>
-                                    <Add />
-                                    <ProductAmount>1</ProductAmount>
-                                    <Remove />
-                                </ProductAmountContainer>
-                                <ProductPrice>$ 110</ProductPrice>
-                            </PriceDetail>
-                        </Product>
-                        <Hr />
-                        <Product>
-                            <ProductInfo>
-                                <Image src="/assets/shoes/jordan11.jpg" />
-                                <Details>
-                                    <ProductName><b>Product:</b> Air Jordan 11 Retro</ProductName>
-                                    <ProductId><b>ID:</b> 5232142</ProductId>
-                                    <ProductColor color="gray" />
-                                    <ProductSize><b>Size: </b> 9</ProductSize>
-                                </Details>
-                            </ProductInfo>
-
-                            <PriceDetail>
-                                <ProductAmountContainer>
-                                    <Add />
-                                    <ProductAmount>1</ProductAmount>
-                                    <Remove />
-                                </ProductAmountContainer>
-                                <ProductPrice>$ 225</ProductPrice>
-                            </PriceDetail>
-                        </Product>
+                                <PriceDetail>
+                                    <ProductAmountContainer>
+                                        <Add />
+                                        <ProductAmount>{product.quantity}</ProductAmount>
+                                        <Remove />
+                                    </ProductAmountContainer>
+                                    <ProductPrice>$ {product.price * product.quantity}</ProductPrice>
+                                </PriceDetail>
+                            </Product>
+                        ))
+                        
+                        }
                         <Hr />
                     </Info>
                     <Summary>
@@ -236,7 +203,7 @@ const Cart = () => {
 
                         <SummaryItem>
                             <SummaryItemText>Subtotal</SummaryItemText>
-                            <SummaryItemPrice>$ 335</SummaryItemPrice>
+                            <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
                         </SummaryItem>
 
                         <SummaryItem>
@@ -251,7 +218,7 @@ const Cart = () => {
                         
                         <SummaryItem type="total">
                             <SummaryItemText>Total</SummaryItemText>
-                            <SummaryItemPrice>$ 335</SummaryItemPrice>
+                            <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
                         </SummaryItem>
 
                         <Button>CHECKOUT NOW</Button>

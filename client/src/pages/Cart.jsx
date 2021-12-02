@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react'
-import { useLocation } from 'react-router-dom'
+import React, {useState, useEffect} from 'react'
+import { useLocation, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import Announcement from '../components/Announcement'
 import Navbar from '../components/Navbar'
@@ -7,6 +7,10 @@ import Footer from "../components/Footer";
 import { Add, Remove } from "@material-ui/icons";
 import {mobile} from '../responsive'
 import { useSelector } from "react-redux";
+import { userRequest } from '../requestMethods'
+import StripeCheckout from 'react-stripe-checkout'
+
+const KEY = process.env.REACT_APP_STRIPE;
 
 const Container = styled.div``
 const Wrapper = styled.div`
@@ -139,13 +143,38 @@ const Button = styled.button`
     font-weight: 600;
 `
 
+
 const Cart = () => {
     const location = useLocation()
-    const cart = useSelector(state => state.cart)
+    const cart = useSelector((state) => state.cart)
+    const [stripeToken, setStripeToken] = useState(null)
+    const history = useHistory()
+
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [location])
+
+    const onToken = (token) => {
+        setStripeToken(token)
+    }
+
+    useEffect(() => {        
+        const makeRequest = async () => {
+            try {
+                const res = await userRequest.post("/checkout/payment", {
+                    tokenId: stripeToken.id,
+                    amount: 500,
+                    // amount: cart.total * 100,
+                })
+                history.push("/success", {
+                    stripeData: res.data,
+                    products: cart,
+                })
+            } catch (err) {console.log(err);}
+        }
+        if(stripeToken) makeRequest()        
+    }, [stripeToken, cart.total, history])
     
 
     return (
@@ -166,8 +195,8 @@ const Cart = () => {
                 
                 <Bottom>
                     <Info>
-                        { cart.products.map(product => (
-                            <Product>
+                        { cart.products.map((product, index) => (
+                            <Product key={index}>
                                 <ProductInfo>
                                     <Image src={product.img} />
                                     <Details>
@@ -221,7 +250,17 @@ const Cart = () => {
                             <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
                         </SummaryItem>
 
-                        <Button>CHECKOUT NOW</Button>
+                        <StripeCheckout
+                            name="JdonL Shop"
+                            billingAddress
+                            shippingAddress
+                            description={`Your total is $${cart.total}`}
+                            amount={cart.total*100}
+                            token={onToken}
+                            stripeKey={KEY}
+                        >
+                            <Button>CHECKOUT NOW</Button>
+                        </StripeCheckout>
                     </Summary>
                 </Bottom>
             </Wrapper>

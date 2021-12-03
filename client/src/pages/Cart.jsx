@@ -164,14 +164,13 @@ const Cart = () => {
             try {
                 const res = await userRequest.post("/checkout/payment", {
                     tokenId: stripeToken.id,
-                    amount: 500,
-                    // amount: cart.total * 100,
+                    amount: cart.total * 100,
                 })
                 history.push("/success", {
                     stripeData: res.data,
                     products: cart,
                 })
-            } catch (err) {console.log(err);}
+            } catch (err) {console.log(err)}
         }
         if(stripeToken) makeRequest()        
     }, [stripeToken, cart.total, history])

@@ -4,10 +4,11 @@ import { Facebook, Instagram, Twitter, Pinterest, Room, Phone, MailOutline } fro
 import { mobile } from '../responsive';
 
 const Container = styled.div`
+    max-width: 1350px;
+    margin: 20px auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-content: space-between;
-    margin: 20px 0;
     ${mobile({ gridTemplateColumns: "1fr", gridGap: "10px" })}
 `
 

@@ -7,7 +7,9 @@ import {mobile} from '../responsive'
 import {tablet} from '../responsive'
 
 const Container = styled.div`
-    padding: 20px;
+    max-width: 1350px;
+    margin: 0 auto;
+    padding: 20px 0px;
     /* display: flex;    
     flex-wrap: wrap;
     justify-content: space-between; */

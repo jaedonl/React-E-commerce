@@ -7,7 +7,7 @@ import {mobile} from '../responsive'
 
 const Container = styled.div`
     width: 100%;
-    height: 100vh;
+    height: 80vh;
     display: flex;    
     position: relative;    
     overflow: hidden;
@@ -42,9 +42,9 @@ const Wrapper = styled.div`
 
 const Slide = styled.div`
     width: 100vw;
-    height: 100vh;
+    height: 80vh;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 3fr 2fr;
     align-items: center;
     background-color: #${props => props.bg};
     ${mobile({ gridTemplateColumns: "1fr" })}

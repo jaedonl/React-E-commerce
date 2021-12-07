@@ -1,11 +1,14 @@
 .featured {
     width: 100%;
-    display: flex;
+    // display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    // grid-template-columns: repeat(3, minmax(0, 1fr));    
     justify-content: space-between;
 
     .featuredItem {
         flex: 1;
-        margin: 0 20px;
+        margin: 20px;
         padding: 30px;
         border-radius: 10px;
         cursor: pointer;
@@ -22,7 +25,8 @@
             align-items: center;
 
             .featuredMoney {
-                font-size: 30px;
+                // font-size: 30px;
+                font-size: 28px;
                 font-weight: 600;
             }
 

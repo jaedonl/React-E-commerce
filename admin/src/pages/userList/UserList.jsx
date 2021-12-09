@@ -8,10 +8,12 @@ import { DeleteOutline } from "@material-ui/icons";
 const UserList = () => {
     const [data, setData] = useState(userRows)
 
-    const handleDelete = (id) => {
+    const handleDelete = async (id) => {      
+      if (window.confirm("Are you sure to delete this user?")) {          
         setData(data.filter(item=>item.id !== id)) // id 가 로우id 랑 같으면 로우에서 빼버린다.
-        
+      }
     }
+
   
 
     const columns = [
@@ -47,7 +49,7 @@ const UserList = () => {
           renderCell: (params) => {
             return (
               <>
-                <Link to={"/user/" + params.row.id}>
+                <Link to={"/users/" + params.row.id}>
                   <button className="userListEdit">Edit</button>
                 </Link>
                 <DeleteOutline

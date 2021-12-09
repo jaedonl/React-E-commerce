@@ -9,7 +9,7 @@ const UserList = () => {
     const [data, setData] = useState(userRows)
 
     const handleDelete = (id) => {
-        setData(data.filter(item=>item.id !== id))
+        setData(data.filter(item=>item.id !== id)) // id 가 로우id 랑 같으면 로우에서 빼버린다.
         
     }
   

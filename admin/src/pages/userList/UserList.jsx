@@ -8,9 +8,11 @@ import { DeleteOutline } from "@material-ui/icons";
 const UserList = () => {
     const [data, setData] = useState(userRows)
 
-    const handleDelete = () => {
+    const handleDelete = (id) => {
+        setData(data.filter(item=>item.id !== id))
         
     }
+  
 
     const columns = [
         { field: "id", headerName: "ID", width: 90 },
@@ -18,7 +20,7 @@ const UserList = () => {
           field: "user",
           headerName: "User",
           width: 200,
-          renderCell: (params) => {
+          renderCell: (params) => {            
             return (
               <div className="userListUser">
                 <img className="userListImg" src={params.row.avatar} alt="" />
@@ -59,7 +61,7 @@ const UserList = () => {
     ];    
     return (
         <div className="userList">
-            <DataGrid rows={data} columns={columns} pageSize={5} rowsPerPageOptions={[5]} checkboxSelection disableSelectionOnClick />
+            <DataGrid rows={data} columns={columns} pageSize={6} rowsPerPageOptions={[6]} checkboxSelection disableSelectionOnClick />
         </div>
     )
 }

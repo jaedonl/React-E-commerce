@@ -78,5 +78,6 @@ export const userRows = [
   { id: 2, username: 'Klay Thompson', avatar: 'https://picsum.photos/200/200?random=2', email: 'klay@email.com', status: 'active', transaction: '$120' },
   { id: 3, username: 'Draymond Green', avatar: 'https://picsum.photos/200/200?random=3', email: 'green@email.com', status: 'active', transaction: '$120' },
   { id: 4, username: 'Andrew Wiggins', avatar: 'https://picsum.photos/200/200?random=4', email: 'wiggins@email.com', status: 'active', transaction: '$120' },
-  { id: 5, username: 'Jordan Poole', avatar: 'https://picsum.photos/200/200?random=5', email: 'poole@email.com', status: 'active', transaction: '$120' }
+  { id: 5, username: 'Jordan Poole', avatar: 'https://picsum.photos/200/200?random=5', email: 'poole@email.com', status: 'active', transaction: '$120' },
+  { id: 6, username: 'Willbe Gone', avatar: 'https://picsum.photos/200/200?random=6', email: 'gone@email.com', status: 'inactive', transaction: '$120' },
 ];

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './WidgetSm.scss'
 import { Visibility } from '@material-ui/icons';
 
@@ -15,9 +16,11 @@ const WidgetSm = () => {
                             <span className="widgetSmUserTitle">Basketball Player</span>
                         </div>
                     </div>
-                    <button className="widgetSmButton">
-                        <Visibility className="widgetSmIcon" />View User
-                    </button>
+                    <Link to="/users/1">
+                        <button className="widgetSmButton">                        
+                            <Visibility className="widgetSmIcon" />View User                                       
+                        </button>
+                    </Link>         
                 </li>
                 <li className="widgetSmListItem">
                     <div className="widgetSmImgNameWrap">

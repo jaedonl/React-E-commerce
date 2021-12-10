@@ -1,9 +1,12 @@
 .newUser {
     flex: 4;
+    padding: 20px;
 
     .newUserForm {
         display: flex;
         flex-wrap: wrap;
+        max-width: 1000px;
+
 
         .newUserItem {
             width: 400px;

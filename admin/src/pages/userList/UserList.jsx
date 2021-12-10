@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import './UserList.scss'
 import { Link } from 'react-router-dom'
+import './UserList.scss'
 import { userRows } from '../../dummyData';
 import { DataGrid } from '@material-ui/data-grid';
 import { DeleteOutline } from "@material-ui/icons";
@@ -13,8 +13,6 @@ const UserList = () => {
         setData(data.filter(item=>item.id !== id)) // id 가 로우id 랑 같으면 로우에서 빼버린다.
       }
     }
-
-  
 
     const columns = [
         { field: "id", headerName: "ID", width: 90 },
@@ -63,6 +61,12 @@ const UserList = () => {
     ];    
     return (
         <div className="userList">
+            <div className="userListAddButton">
+              <h1 className="userListTitle">Users</h1>
+              <Link to="/users/newuser">
+                <button className="newUserButton">Create</button>
+              </Link>              
+            </div>
             <DataGrid rows={data} columns={columns} pageSize={6} rowsPerPageOptions={[6]} checkboxSelection disableSelectionOnClick />
         </div>
     )

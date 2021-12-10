@@ -21,11 +21,11 @@ const WidgetLg = () => {
                 <tr className="widgetLgTr">
                     <td className="widgetLgUser">
                         <img
-                        src="https://picsum.photos/200/200?random=6"
+                        src="https://picsum.photos/200/200?random=1"
                         alt=""
                         className="widgetLgImg"
                         />
-                        <span className="widgetLgName">Susan Carol</span>
+                        <span className="widgetLgName">Stephen Curry</span>
                     </td>
                     <td className="widgetLgDate">2 Jun 2021</td>
                     <td className="widgetLgAmount">$122.00</td>
@@ -37,11 +37,11 @@ const WidgetLg = () => {
                 <tr className="widgetLgTr">
                     <td className="widgetLgUser">
                         <img
-                        src="https://picsum.photos/200/200?random=7"
+                        src="https://picsum.photos/200/200?random=2"
                         alt=""
                         className="widgetLgImg"
                         />
-                        <span className="widgetLgName">Susan Carol</span>
+                        <span className="widgetLgName">Andrew Wiggins</span>
                     </td>
                     <td className="widgetLgDate">2 Jun 2021</td>
                     <td className="widgetLgAmount">$122.00</td>
@@ -52,11 +52,11 @@ const WidgetLg = () => {
                 <tr className="widgetLgTr">
                     <td className="widgetLgUser">
                         <img
-                        src="https://picsum.photos/200/200?random=8"
+                        src="https://picsum.photos/200/200?random=3"
                         alt=""
                         className="widgetLgImg"
                         />
-                        <span className="widgetLgName">Susan Carol</span>
+                        <span className="widgetLgName">Klay Thompson</span>
                     </td>
                     <td className="widgetLgDate">2 Jun 2021</td>
                     <td className="widgetLgAmount">$122.00</td>
@@ -68,11 +68,11 @@ const WidgetLg = () => {
                 <tr className="widgetLgTr">
                     <td className="widgetLgUser">
                         <img
-                        src="https://picsum.photos/200/200?random=9"
+                        src="https://picsum.photos/200/200?random=4"
                         alt=""
                         className="widgetLgImg"
                         />
-                        <span className="widgetLgName">Susan Carol</span>
+                        <span className="widgetLgName">Jordan Poole</span>
                     </td>
                     <td className="widgetLgDate">2 Jun 2021</td>
                     <td className="widgetLgAmount">$122.00</td>

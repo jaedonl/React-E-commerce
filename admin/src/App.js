@@ -30,6 +30,7 @@ function App() {
               <Route exact path="/products" component={ProductList} />
               <Route path="/products/newproduct" component={NewProduct} />
               <Route path="/products/:productId" component={Product} />
+              
           </div>
         </>
       {/* )} */}

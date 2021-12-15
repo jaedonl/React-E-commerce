@@ -145,6 +145,7 @@ const ProductDetail = () => {
         )        
     }
 
+
     return (
         <Container>
             <Announcement/>

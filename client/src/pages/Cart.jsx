@@ -6,9 +6,10 @@ import Navbar from '../components/Navbar'
 import Footer from "../components/Footer";
 import { Add, Remove } from "@material-ui/icons";
 import {mobile} from '../responsive'
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { userRequest } from '../requestMethods'
 import StripeCheckout from 'react-stripe-checkout'
+import { clear } from '../redux/cartRedux'
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -149,6 +150,7 @@ const Cart = () => {
     const cart = useSelector((state) => state.cart)
     const [stripeToken, setStripeToken] = useState(null)
     const history = useHistory()
+    const dispatch = useDispatch()
 
 
     useEffect(() => {
@@ -159,6 +161,12 @@ const Cart = () => {
         setStripeToken(token)
     }
 
+    const clearCart = () => {
+        dispatch(
+            clear()
+        )        
+    }
+    
     useEffect(() => {        
         const makeRequest = async () => {
             try {
@@ -258,8 +266,9 @@ const Cart = () => {
                             token={onToken}
                             stripeKey={KEY}
                         >
-                            <Button>CHECKOUT NOW</Button>
+                            <Button>CHECKOUT NOW</Button>                            
                         </StripeCheckout>
+                        <Button onClick={clearCart}>Clear Cart</Button>
                     </Summary>
                 </Bottom>
             </Wrapper>

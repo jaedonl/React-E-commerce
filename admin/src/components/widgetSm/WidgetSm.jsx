@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import './WidgetSm.scss'
 import { Visibility } from '@material-ui/icons';
 import { userRequest } from '../../requestMethods';
+// import { format } from 'timeago.js'
 
 const WidgetSm = () => {
     const [users, setUsers] = useState([])
@@ -16,10 +17,6 @@ const WidgetSm = () => {
         }
         getUsers()        
     }, [])    
-
-    useEffect(() => {
-        console.log(users);
-    })
 
     return (
         <div className="widgetSm">
@@ -35,6 +32,7 @@ const WidgetSm = () => {
                             <div className="widgetSmUser">
                                 <span className="widgetSmUsername">{user.username}</span>
                                 <span className="widgetSmUserTitle">{Date(user.createdAt).slice(0, 16)}</span>
+                                {/* <span className="widgetSmUserTitle">{format(user.createdAt)}</span> */}
                             </div>
                         </div>
                         <Link to="/users/1">

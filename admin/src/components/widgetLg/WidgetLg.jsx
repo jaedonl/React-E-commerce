@@ -1,7 +1,29 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import './WidgetLg.scss'
+import { userRequest } from '../../requestMethods';
+import { format } from 'timeago.js'
+
 
 const WidgetLg = () => {
+    const [orders, setOrders] = useState([])    
+
+    useEffect(() => {
+        const getOrders = async () => {
+            try {
+                const res = await userRequest.get("orders")
+                setOrders(res.data)
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getOrders()
+    }, [] )
+
+    useEffect(() => {
+        console.log(orders);
+    })
+
+
     const Button = ({ type }) => {
         return <button className={"widgetLgButton " + type}>{type}</button>;
     };
@@ -17,8 +39,21 @@ const WidgetLg = () => {
                     <th className="widgetLgTh">Amount</th>
                     <th className="widgetLgTh">Status</th>
                 </tr>
-
-                <tr className="widgetLgTr">
+                { orders.map((order) => (
+                    <tr className="widgetLgTr">
+                        <td className="widgetLgUser">
+                            <span className="widgetLgName">{order.userId}</span>
+                        </td>
+                        <td className="widgetLgDate">{Date(order.createdAt).slice(0, 16)}</td>
+                        {/* <td className="widgetLgDate">{format(order.createdAt)}</td> */}
+                        <td className="widgetLgAmount">${order.amount}</td>
+                        <td className="widgetLgStatus">
+                            <Button type={order.status} />
+                        </td>
+                    </tr>
+                ))}
+                
+                {/* <tr className="widgetLgTr">
                     <td className="widgetLgUser">
                         <img
                         src="https://picsum.photos/200/200?random=1"
@@ -79,7 +114,7 @@ const WidgetLg = () => {
                     <td className="widgetLgStatus">
                         <Button type="Approved" />
                     </td>
-                </tr>
+                </tr> */}
 
             </table>
         </div>

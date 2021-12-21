@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import './WidgetLg.scss'
 import { userRequest } from '../../requestMethods';
-import { format } from 'timeago.js'
+// import { format } from 'timeago.js'
 
 
 const WidgetLg = () => {
@@ -19,11 +19,6 @@ const WidgetLg = () => {
         getOrders()
     }, [] )
 
-    useEffect(() => {
-        console.log(orders);
-    })
-
-
     const Button = ({ type }) => {
         return <button className={"widgetLgButton " + type}>{type}</button>;
     };
@@ -40,7 +35,7 @@ const WidgetLg = () => {
                     <th className="widgetLgTh">Status</th>
                 </tr>
                 { orders.map((order) => (
-                    <tr className="widgetLgTr">
+                    <tr className="widgetLgTr" key={order._id}>
                         <td className="widgetLgUser">
                             <span className="widgetLgName">{order.userId}</span>
                         </td>

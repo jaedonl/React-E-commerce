@@ -23,24 +23,21 @@ const WidgetSm = () => {
             <span className="widgetSmTitle">New Join Members</span>
             <ul className="widgetSmList">
                 {                    
-                    users.map((user) => (                
-                    
-                    <li className="widgetSmListItem" key={user.id}>
-                        <div className="widgetSmImgNameWrap">
-                            {/* <img src="https://picsum.photos/200/200?random=1" alt="new member image" className="widgetSmImg" /> */}
-                            <img src={user.img || "/assets/profile/noAvatar.png"} alt="new member image" className="widgetSmImg" />
-                            <div className="widgetSmUser">
-                                <span className="widgetSmUsername">{user.username}</span>
-                                <span className="widgetSmUserTitle">{Date(user.createdAt).slice(0, 16)}</span>
-                                {/* <span className="widgetSmUserTitle">{format(user.createdAt)}</span> */}
+                    users.map((user, idx) => (                                    
+                        <li className="widgetSmListItem" key={user._id}>
+                            <div className="widgetSmImgNameWrap">
+                                <img src={user.img || "/assets/profile/noAvatar.png"} alt="new member image" className="widgetSmImg" />
+                                <div className="widgetSmUser">
+                                    <span className="widgetSmUsername">{user.username}</span>
+                                    <span className="widgetSmUserTitle">{Date(user.createdAt).slice(0, 16)}</span>
+                                </div>
                             </div>
-                        </div>
-                        <Link to="/users/1">
-                            <button className="widgetSmButton">                        
-                                <Visibility className="widgetSmIcon" />View User                                       
-                            </button>
-                        </Link>   
-                    </li>   
+                            <Link to="/users/1">
+                                <button className="widgetSmButton">                        
+                                    <Visibility className="widgetSmIcon" />View User                                       
+                                </button>
+                            </Link>   
+                        </li>   
                 ))}                            
             </ul>
         </div>

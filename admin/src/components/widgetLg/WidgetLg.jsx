@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import './WidgetLg.scss'
 import { userRequest } from '../../requestMethods';
-// import { format } from 'timeago.js'
+import { format } from 'timeago.js'
 
 
 const WidgetLg = () => {
@@ -39,8 +39,8 @@ const WidgetLg = () => {
                         <td className="widgetLgUser">
                             <span className="widgetLgName">{order.userId}</span>
                         </td>
-                        <td className="widgetLgDate">{Date(order.createdAt).slice(0, 16)}</td>
-                        {/* <td className="widgetLgDate">{format(order.createdAt)}</td> */}
+                        <td className="widgetLgDate">{new Date(order.createdAt).toLocaleDateString("en-US")}</td>
+                        {/* <td className="widgetLgDate">{formatter(order.createdAt)}</td> */}
                         <td className="widgetLgAmount">${order.amount}</td>
                         <td className="widgetLgStatus">
                             <Button type={order.status} />

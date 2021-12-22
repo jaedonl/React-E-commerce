@@ -29,7 +29,7 @@ const WidgetSm = () => {
                                 <img src={user.img || "/assets/profile/noAvatar.png"} alt="new member image" className="widgetSmImg" />
                                 <div className="widgetSmUser">
                                     <span className="widgetSmUsername">{user.username}</span>
-                                    <span className="widgetSmUserTitle">{Date(user.createdAt).slice(0, 16)}</span>
+                                    <span className="widgetSmUserTitle">{new Date(user.createdAt).toLocaleDateString("en-US")}</span>
                                 </div>
                             </div>
                             <Link to="/users/1">

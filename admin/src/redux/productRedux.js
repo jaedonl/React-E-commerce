@@ -30,8 +30,7 @@ const productSlice = createSlice({
         deleteProductSuccess: (state, action) => { // in this case, 'id' from product in DB is an action value
             state.isFetching = false;
             state.products.splice(
-                state.products.findIndex((item) => item._id === action.payload),
-                1
+                state.products.findIndex((item) => item._id === action.payload), 1
             );
         },
         deleteProductFailure: (state) => {

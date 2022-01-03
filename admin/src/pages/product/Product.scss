@@ -72,6 +72,13 @@
         -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
         box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
 
+        input, select {
+            -ms-box-sizing:content-box;
+            -moz-box-sizing:content-box;
+            -webkit-box-sizing:content-box; 
+            box-sizing:content-box;
+        }
+
         .productForm {
             display: flex;
             justify-content: space-between;
@@ -95,7 +102,7 @@
 
                 .productPriceInput {
                     border: 1px solid gray;
-                    max-width: 35px;
+                    max-width: 60px;
                 }
                 textarea {
                     margin-bottom: 25px;
@@ -105,7 +112,7 @@
                 select {
                     margin-bottom: 25px;
                     border: 1px solid gray;
-                    max-width: 50px;
+                    max-width: 60px;
                     padding: 5px;
                 }
             }

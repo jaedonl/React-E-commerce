@@ -1,10 +1,11 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { Link, useLocation } from "react-router-dom";
 import './Product.scss'
 import Chart from "../../components/chart/Chart"
 import { productData } from "../../dummyData"
 import { Publish } from "@material-ui/icons";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateProduct } from "../../redux/apiCalls"
 
 const Product = () => {
     const location = useLocation()
@@ -12,9 +13,23 @@ const Product = () => {
     const product = useSelector((state) => 
         state.product.products.find(product => product._id === productId)
     )
+    const dispatch = useDispatch()
+    const [updateProductInfo, setUpdateProductInfo] = useState(product)
 
-    console.log(product);
+
+    const handleChange = (e) => {
+        setUpdateProductInfo({
+            ...updateProductInfo,
+            [e.target.name]: e.target.value 
+        })
         
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()   
+        // updateProduct(productId, updateProductInfo, dispatch)
+    }
+            
     return (
         <div className="product">
             <div className="productTitleContainer">
@@ -54,13 +69,13 @@ const Product = () => {
                 <form className="productForm">
                     <div className="productFormLeft">
                         <label>Product Name</label>
-                        <input type="text" value={product.title} />
+                        <input type="text" name="title" value={updateProductInfo.title} onChange={handleChange} />
                         
                         <label>Product Description</label>
-                        <textarea type="text" rows="4" value={product.desc} />
+                        <textarea type="text" name="desc" rows="4" value={updateProductInfo.desc} onChange={handleChange} />
 
                         <label>Product Price</label>                        
-                        <input type="text" value={product.price} className="productPriceInput" />
+                        <input type="number" name="price" value={updateProductInfo.price} className="productPriceInput" onChange={handleChange} />
                         
                         <label>In Stock</label>
                         <select name="inStock" id="idStock">
@@ -70,13 +85,13 @@ const Product = () => {
                     </div>
                     <div className="productFormRight">
                         <div className="productUpload">
-                            <img src={product.img} alt="" className="productUploadImg" />
+                            <img src={updateProductInfo.img} alt="" className="productUploadImg" />
                             <label for="file">
                                 <Publish/>
                             </label>
                             <input type="file" id="file" style={{display:"none"}} />
                         </div>
-                        <button className="productButton">Update</button>
+                        <button className="productButton" onClick={handleSubmit}>Update</button>
                     </div>
                 </form>
             </div>

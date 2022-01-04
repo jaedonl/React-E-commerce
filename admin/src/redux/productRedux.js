@@ -44,19 +44,16 @@ const productSlice = createSlice({
         updateProductStart: (state) => {
             state.isFetching = true
             state.error = false
-            console.log('start')
         },
         updateProductSuccess: (state, action) => {
             state.isFetching = false;
             state.products[
                 state.products.findIndex((item) => item._id === action.payload.id)
             ] = action.payload.products
-            console.log('done', action.payload)            
         },
         updateProductFailure: (state) => {
             state.isFetching = false;
             state.error = true;
-            console.log('error')
         },
     }
 })
@@ -64,7 +61,7 @@ const productSlice = createSlice({
 export const { 
     getProductStart, getProductSuccess, getProductFailure,
     deleteProductStart, deleteProductSuccess, deleteProductFailure,
-    updateProductStart, updateProductSuccess, updateProductFailure,
+    updateProductStart, updateProductSuccess, updateProductFailure
 
 } = productSlice.actions;
 

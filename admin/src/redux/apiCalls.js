@@ -1,8 +1,8 @@
 import { loginStart, loginFailure, loginSuccess } from "./userRedux";
+import { publicRequest, userRequest } from "../requestMethods";
 import { getProductStart, getProductSuccess, getProductFailure, 
         deleteProductStart, deleteProductSuccess, deleteProductFailure,
         updateProductStart, updateProductSuccess, updateProductFailure } from "./productRedux";
-import { publicRequest } from "../requestMethods";
 
 export const login = async (dispatch, user) => {
     dispatch(loginStart())
@@ -37,7 +37,8 @@ export const deleteProduct = async (id, dispatch) => {
 export const updateProduct = async (id, product, dispatch) => {
     dispatch(updateProductStart())
     try {
-        dispatch(updateProductSuccess({ id, product }));
+        const res = await userRequest.put(`/products/${id}`, product);
+        dispatch(updateProductSuccess(res.data));
     } catch (err) {
         dispatch(updateProductFailure());
     }

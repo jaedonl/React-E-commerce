@@ -1,11 +1,13 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useMemo} from 'react'
 import { Link, useLocation } from "react-router-dom";
 import './Product.scss'
 import Chart from "../../components/chart/Chart"
 import { productData } from "../../dummyData"
 import { Publish } from "@material-ui/icons";
 import { useSelector, useDispatch } from 'react-redux';
-import { updateProduct } from "../../redux/apiCalls"
+import { userRequest, publicRequest } from "../../requestMethods";
+import { updateProduct, getProducts } from "../../redux/apiCalls"
+
 
 const Product = () => {
     const location = useLocation()
@@ -15,8 +17,47 @@ const Product = () => {
     )
     const dispatch = useDispatch()
     const [updateProductInfo, setUpdateProductInfo] = useState(product)
+    const [pStats, setPStats] = useState([])
 
+    const MONTHS = useMemo(
+        () => [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+        ], 
+        []
+    )
 
+    useEffect(() => {
+        const getStats = async () => {
+            try {
+                const res = await userRequest.get("orders/income?pid=" + productId);
+                const list = res.data.sort((a,b)=>{
+                    return a._id - b._id
+                })
+                list.map((item) =>
+                    setPStats((prev) => [
+                            ...prev,
+                            { name: MONTHS[item._id - 1], Sales: item.total },
+                        ])
+                );
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        getStats();
+    }, [productId, MONTHS]);
+
+    
     const handleChange = (e) => {
         setUpdateProductInfo({
             ...updateProductInfo,
@@ -25,9 +66,9 @@ const Product = () => {
         
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault()   
-        // updateProduct(productId, updateProductInfo, dispatch)
+    const handleSubmit = (e) => {                   
+        e.preventDefault()
+        updateProduct(productId, updateProductInfo, dispatch)
     }
             
     return (
@@ -45,13 +86,13 @@ const Product = () => {
                 </div>
                 <div className="productTopRight">
                     <div className="productInfoTop">
-                        <img src={product.img} alt="" className="productInfoImg" />
-                        <span className="productName">{product.title}</span>
+                        <img src={updateProductInfo.img} alt="" className="productInfoImg" />
+                        <span className="productName">{updateProductInfo.title}</span>
                     </div>
                     <div className="productInfoBottom">
                         <div className="productInfoItem">
                             <span className="productInfoKey" style={{marginRight: "10px"}}>id:</span>
-                            <span className="productInfoValue">{product._id}</span>
+                            <span className="productInfoValue">{updateProductInfo._id}</span>
                         </div>
                         <div className="productInfoItem">
                             <span className="productInfoKey" style={{marginRight: "10px"}}>sales:</span>
@@ -59,7 +100,7 @@ const Product = () => {
                         </div>
                         <div className="productInfoItem">
                             <span className="productInfoKey" style={{marginRight: "10px"}}>in stock:</span>
-                            <span className="productInfoValue">{product.inStock ? "yes" : "no"}</span>
+                            <span className="productInfoValue">{updateProductInfo.inStock ? "yes" : "no"}</span>
                         </div>
                     </div>
                 </div>

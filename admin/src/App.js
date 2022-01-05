@@ -27,9 +27,9 @@ function App() {
               <Route path="/users/newuser" component={NewUser} />
               <Route path="/users/:userId" component={User} />
 
-              <Route exact path="/products" component={ProductList} />
-              <Route path="/products/newproduct" component={NewProduct} />
+              <Route exact path="/products" component={ProductList} />              
               <Route path="/products/:productId" component={Product} />
+              <Route path="/newproduct" component={NewProduct} />
               
           </div>
         </>

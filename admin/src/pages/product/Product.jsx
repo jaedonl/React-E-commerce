@@ -5,8 +5,8 @@ import Chart from "../../components/chart/Chart"
 import { productData } from "../../dummyData"
 import { Publish } from "@material-ui/icons";
 import { useSelector, useDispatch } from 'react-redux';
-import { userRequest, publicRequest } from "../../requestMethods";
-import { updateProduct, getProducts } from "../../redux/apiCalls"
+import { userRequest } from "../../requestMethods";
+import { updateProduct } from "../../redux/apiCalls"
 
 
 const Product = () => {
@@ -58,41 +58,47 @@ const Product = () => {
     }, [productId, MONTHS]);
 
     
-    const handleChange = (e) => {
-        setUpdateProductInfo({
-            ...updateProductInfo,
-            [e.target.name]: e.target.value 
+    const handleChange = (e) => {        
+        setUpdateProductInfo(prev=> {
+            return { 
+                ...prev, 
+                [e.target.name]: e.target.value 
+            }
         })
-        
     }
 
     const handleSubmit = (e) => {                   
         e.preventDefault()
         updateProduct(productId, updateProductInfo, dispatch)
     }
-            
+
+ 
     return (
         <div className="product">
             <div className="productTitleContainer">
                 <h1 className="productTitle">Product</h1>
-                <Link to="./newproduct">
+                <Link to="/newproduct">
                     <button className="productAddButton">Create</button>
                 </Link>
             </div>
 
             <div className="productTop">
                 <div className="productTopLeft">
-                    <Chart data={productData} dataKey="Sales" title="Sales Performance"/>
+                    <Chart data={pStats} dataKey="Sales" title="Sales Performance"/>
                 </div>
                 <div className="productTopRight">
                     <div className="productInfoTop">
-                        <img src={updateProductInfo.img} alt="" className="productInfoImg" />
-                        <span className="productName">{updateProductInfo.title}</span>
+                        <img src={product.img} alt="" className="productInfoImg" />
+                        <span className="productName">{product.title}</span>
                     </div>
                     <div className="productInfoBottom">
                         <div className="productInfoItem">
                             <span className="productInfoKey" style={{marginRight: "10px"}}>id:</span>
-                            <span className="productInfoValue">{updateProductInfo._id}</span>
+                            <span className="productInfoValue">{product._id}</span>
+                        </div>
+                        <div className="productInfoItem">
+                            <span className="productInfoKey" style={{marginRight: "10px"}}>category:</span>
+                            <span className="productInfoValue">{product.categories}</span>
                         </div>
                         <div className="productInfoItem">
                             <span className="productInfoKey" style={{marginRight: "10px"}}>sales:</span>
@@ -100,7 +106,7 @@ const Product = () => {
                         </div>
                         <div className="productInfoItem">
                             <span className="productInfoKey" style={{marginRight: "10px"}}>in stock:</span>
-                            <span className="productInfoValue">{updateProductInfo.inStock ? "yes" : "no"}</span>
+                            <span className="productInfoValue">{product.inStock ? "yes" : "no"}</span>
                         </div>
                     </div>
                 </div>
